@@ -24,14 +24,10 @@ module entangler(qbit reg[2]) {
   CNOT(reg[1], reg[0]);
 }
 
-module finalRotations(qbit reg[2]) {
-  
-}
 
 module prepareAnsatz(qbit reg[2]) {
   initialRotations(reg);
   entangler(reg);
-  finalRotations(reg);
 }
 
 module measure(qbit reg[2], cbit result[2]) {
@@ -74,14 +70,10 @@ module entangler(qbit reg[2]) {
   CNOT(reg[1], reg[0]);
 }
 
-module finalRotations(qbit reg[2]) {
-  
-}
 
 module prepareAnsatz(qbit reg[2]) {
   initialRotations(reg);
   entangler(reg);
-  finalRotations(reg);
 }
 
 module measure(qbit reg[2], cbit result[2]) {
@@ -126,14 +118,10 @@ module entangler(qbit reg[2]) {
   CNOT(reg[1], reg[0]);
 }
 
-module finalRotations(qbit reg[2]) {
-  
-}
 
 module prepareAnsatz(qbit reg[2]) {
   initialRotations(reg);
   entangler(reg);
-  finalRotations(reg);
 }
 
 module measure(qbit reg[2], cbit result[2]) {
@@ -164,12 +152,12 @@ int main() {
 
 # Compile the Scaffold to OpenQASM
 from scaffcc_interface import ScaffCC
-openqasmZZ = ScaffCC(scaffold_codeZZ).get_openqasm()
 openqasmXX = ScaffCC(scaffold_codeXX).get_openqasm()
 openqasmYY = ScaffCC(scaffold_codeYY).get_openqasm()
-print(openqasmZZ)
+openqasmZZ = ScaffCC(scaffold_codeZZ).get_openqasm()
 print(openqasmXX)
 print(openqasmYY)
+print(openqasmZZ)
 
 
 # ### Execute on a Simulator
@@ -185,21 +173,21 @@ Aer.backends()
 
 
 simulator = Aer.get_backend('qasm_simulator')
-vqe_circZZ = QuantumCircuit.from_qasm_str(openqasmZZ)
 vqe_circXX = QuantumCircuit.from_qasm_str(openqasmXX)
 vqe_circYY = QuantumCircuit.from_qasm_str(openqasmYY)
+vqe_circZZ = QuantumCircuit.from_qasm_str(openqasmZZ)
 num_shots = 100000
-sim_resultZZ = execute(vqe_circZZ, simulator, shots=num_shots).result()
 sim_resultXX = execute(vqe_circXX, simulator, shots=num_shots).result()
 sim_resultYY = execute(vqe_circYY, simulator, shots=num_shots).result()
+sim_resultZZ = execute(vqe_circZZ, simulator, shots=num_shots).result()
 
-countsZZ = sim_resultZZ.get_counts()
 countsXX = sim_resultXX.get_counts()
 countsYY = sim_resultYY.get_counts()
+countsZZ = sim_resultZZ.get_counts()
 
-expected_valueZZ = (countsZZ.get('00', 0) - countsZZ.get('01', 0) - countsZZ.get('10', 0) + countsZZ.get('11', 0)) / num_shots
 expected_valueXX = (countsXX.get('00', 0) - countsXX.get('01', 0) - countsXX.get('10', 0) + countsXX.get('11', 0)) / num_shots
 expected_valueYY = (countsYY.get('00', 0) - countsYY.get('01', 0) - countsYY.get('10', 0) + countsYY.get('11', 0)) / num_shots
+expected_valueZZ = (countsZZ.get('00', 0) - countsZZ.get('01', 0) - countsZZ.get('10', 0) + countsZZ.get('11', 0)) / num_shots
 
 expected_value = 0.5 - 0.5 * expected_valueXX + 0.5 * expected_valueZZ - 0.5 * expected_valueYY
 print('The lowest eigenvalue is the expected value, which is : %s' % expected_value)
@@ -228,4 +216,3 @@ circuit_drawer(vqe_circYY, scale=.4)
 
 from qiskit.tools.visualization import circuit_drawer
 circuit_drawer(vqe_circZZ, scale=.4)
-
