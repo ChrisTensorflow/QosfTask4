@@ -7,22 +7,23 @@
 
 
 scaffold_codeBell = """
+
+// Ref[2] https://www.asc.ohio-state.edu/perry.6/p5501_sp17/articles/quantum_gates.pdf
+// Ref[3] https://arxiv.org/pdf/1901.00015.pdf
+
 const double alpha0 = 3.14159265359;
 
-// Ref[3] https://www.asc.ohio-state.edu/perry.6/p5501_sp17/articles/quantum_gates.pdf
-// Ref[4] https://arxiv.org/pdf/1901.00015.pdf
-
 module initialRotations(qbit reg[2]) {
-  H(reg[0]); // Fig. 3(a) of Ref[4]
-  X(reg[1]); // Fig. 2.29 of Ref[3] and Fig. 3(a) of Ref[4]
-  CNOT(reg[0], reg[1]); // Fig. 2.29 of Ref[3] and Fig. 3(a) of Ref[4]
-  X(reg[1]); // Fig. 2.29 of Ref[3] and Fig. 3(a) of Ref[4]
-  CNOT(reg[0], reg[1]); // Fig. 2.29 of Ref[3] and Fig. 3(a) of Ref[4]
-  Rx(reg[1], alpha0);
+  H(reg[0]); // Start of Fig. 3(a) of Ref[3]
+  X(reg[1]); // Start of Fig. 2.29 of Ref[2] with A = B = X and C = an X-rotation by alpha0
+  CNOT(reg[0], reg[1]); 
+  X(reg[1]); 
+  CNOT(reg[0], reg[1]); 
+  Rx(reg[1], alpha0); // End of Fig. 2.29 of Ref[2] 
   CNOT(reg[1], reg[2]);
   H(reg[1]);
-  S(reg[0]); // Fig. 3(a) of Ref[4]
-  H(reg[0]); // Fig. 3(a) of Ref[4]
+  S(reg[0]); 
+  H(reg[0]); // End of Fig. 3(a) of Ref[3]
   
 }
 
