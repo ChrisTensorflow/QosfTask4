@@ -7,6 +7,9 @@
 
 
 scaffold_codeBell = """
+
+// Ref[1] https://arxiv.org/pdf/1907.13623.pdf
+
 const double alpha0 = 3.14159265359;
 
 module initialRotations(qbit reg[2]) {
@@ -31,8 +34,8 @@ module prepareAnsatz(qbit reg[2]) {
 }
 
 module measure(qbit reg[2], cbit result[2]) {
-  CNOT(reg[0], reg[1]);
-  H(reg[0]);
+  CNOT(reg[0], reg[1]); // Fig. 7 of Ref[1]
+  H(reg[0]); // Fig. 7 of Ref[1]
   result[0] = MeasZ(reg[0]);
   result[1] = MeasZ(reg[1]);
 }
