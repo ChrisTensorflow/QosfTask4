@@ -6,7 +6,7 @@ In the first version, I searched through different Rx rotation angles and found 
 
 In the second version, I use the circuit in figure 7 and the theory in section 7.2 of Ref [1] to improve my VQE implementation. Instead of having to run three different quantum circuits in order to get the final answer (as I did in version 1), I can arrive at the same result using only one circuit by processing the quantum measurement results more efficiently.
 
-In the third version, I adapt the algorithm so that the output is the derivative of the lowest eigenvalue with respect to rotation angle. When the derivative is close to zero, this shows that one is close to finding the optimal angle for the VQE algorithm. I used Ref [3] for the main concept but this involved doing a controlled-rotation. To implement this, I used Ref [2].
+In the third version, I adapt the algorithm so that the output is the derivative of the lowest eigenvalue with respect to rotation angle. When the derivative is close to zero, this shows that one is close to finding the optimal angle for the VQE algorithm. I used Ref [3] for the main concept but this involved doing a controlled-rotation for which I found Ref [2] very useful.
 
 [1] Minimizing State Preparations in Variational Quantum Eigensolverby Partitioning into Commuting Families
     Pranav Gokhale, Olivia Angiuli, Yongshan Ding, Kaiwen Gui, Teague Tomesh, Martin Suchara, Margaret Martonosi, and Frederic T. Chong
