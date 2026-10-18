@@ -17,3 +17,7 @@ In the third version, I adapt the algorithm so that the output is the derivative
 [3] Methodology for replacing indirect measurements with direct measurements
     Kosuke  Mitarai and  Keisuke  Fujii
     arXiv:1901.00015v2
+
+## License
+
+This project is licensed under the MIT license. See [LICENSE](LICENSE).
